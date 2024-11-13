@@ -70,9 +70,9 @@ function addRowToTable(caseData) {
         <td>
             <select class="form-control mb-2" onchange="prepareWhatsAppNotification(this, '${caseData.nomorPerkara}', '${caseData.tanggal}', '${caseData.ruangan}', '${caseData.agenda}', '${caseData.penggugat}', '${caseData.tergugat}', '${caseData.majelisHakim}', '${caseData.paniteraPengganti}')">
                 <option value="">Pilih Nomor</option>
-                <option value="+6282181361433">+6282181361433 (Apri)</option>
-                <option value="+6289876543210">+6289876543210</option>
-                <option value="+6281122334455">+6281122334455</option>
+                <option value="+6282181361433">+6282181361433 (Gatot Kaca)</option>
+                <option value="+6289876543210">+6288706884957 (Apri)</option>
+                <option value="+6281122334455">+6282278675681 (Gondo)</option>
             </select>
             <button class="btn btn-notification mt-2" onclick="sendWhatsAppNotification(this)">Kirim Notifikasi</button>
         </td>
