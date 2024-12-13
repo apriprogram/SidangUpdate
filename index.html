@@ -8,53 +8,153 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="icon" href="https://media.pn-gunungsugih.go.id//public/images/pn_media_1-6734f764932d4.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://media.pn-gunungsugih.go.id//public/images/pn_media_1-6734f764932d4.png"
+        type="image/png">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-light d-flex justify-content-center py-4">
     <div class="container-fluid px-4">
         <!-- Header dengan Logo -->
-        <div class="header mb-4">
-            <img src="logo/Logo_speaker.png" alt="Logo">
-            
-            <h2 class="text-overflow my-0 " style="font-weight: bold;">Aplikasi Pemberitahuan Jadwal Sidang </h2><img src="logo/logo_pngns.png" alt="Logo"><h2 class="text-overflow my-0 ">PN Gunung Sugih</h2>
+        <div class="header mb-4 d-flex align-items-center justify-content-start flex-wrap text-align-items-center">
+            <div class="header-logos d-flex justify-content-center">
+                <img src="logo/logo_pngns.png" alt="Logo Kanan" class="logo">
+                <img src="logo/Logo_speaker.png" alt="Logo Kiri" class="logo">
+            </div>
+            <div class="header-text">
+                <h2 class="my-0 font-weight-bold">Sistem Pemberitahuan Jadwal Sidang</h2>
+                <h5 class="my-0 mt-1">Pengadilan Negeri Gunung Sugih</h5>
+            </div>
         </div>
 
-        <!-- Form Unggah dan Filter -->
-        <div class="card p-4 mb-6 shadow-sm">
-            <div class="row g-3 align-items-center">
-                <!-- Input File -->
-                <div class="col-md-6">
-                    <label for="excelFile" class="form-label">Upload Dokumen Excel Jadwal Sidang:</label>
+        <!-- Form Unggah, Filter, dan Pencarian -->
+        <div class="card p-4 mb-6">
+            <div class="row g-3">
+                <!-- Bagian Upload File -->
+                <div class="col-12 col-md-5">
+                    <label for="excelFile" class="form-label" style="font-weight: 600; font-size: 16px;">Upload Dokumen Excel Jadwal Sidang:</label>
                     <input type="file" id="excelFile" class="form-control" accept=".xls, .xlsx">
                 </div>
 
-                <!-- Filter Dropdown -->
-                <div class="col-md-6">
-                    <label for="filterCategory" class="form-label">Filter Nomor Perkara:</label>
-                    <select id="filterCategory" class="form-select">
-                        <option value="">Tampilkan Semua</option>
-                        <option value="Pid">Pidana</option>
-                        <option value="Pdt">Perdata</option>
-                    </select>
+                <!-- Bagian Pencarian -->
+                <div class="col-12 col-md-5">
+                    <label for="searchBox" class="form-label" style="font-weight: 600; font-size: 16px;">Cari Nomor Perkara:</label>
+                    <div class="input-group">
+                        <input type="text" id="searchBox" class="form-control" placeholder="Cari...">
+                        <span class="input-group-text">
+                            <i class="bi bi-search"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-12 col-md-2">
+                    <label for="searchBox" class="form-label">Filter:</label>
+                    <button class="btn btn-primary w-100" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse">
+                        <i class="bi bi-filter"></i> Filter
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dropdown untuk Menampilkan Filter -->
+            <div class="row g-3 mt-1">
+                <!-- Tombol Tampilkan Data -->
+                <div class="col-12 col-md-2 mb-3 mb-md-0">
+                    <button id="submitButton" class="btn btn-primary w-100" >
+                        <i class="bi bi-eye"></i> Tampilkan Data
+                    </button>
                 </div>
 
-                <!-- Button Tampilkan Data -->
+                <!-- Tombol Download -->
+                <div class="col-12 col-md-2 d-flex flex-column flex-md-row">
+                    <button id="downloadWord" class="btn w-100 w-md-auto mb-2 mb-md-0 me-md-2"
+                        style="background-color: #0984e3;">
+                        <i class="bi bi-file-earmark-word"></i> Word
+                    </button>
+                    <button id="downloadPDF" class="btn w-100 w-md-auto" style="background-color: #d63031;">
+                        <i class="bi bi-file-earmark-pdf"></i> PDF
+                    </button>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <button id="submitButton" class="btn btn-primary w-100 mt-3">Tampilkan Data</button>
+
+            <!-- Filter yang akan muncul setelah klik tombol Filter -->
+            <div class="collapse" id="filterCollapse">
+                <div class="row g-3 mt-1">
+                    <!-- Filter Nomor Perkara -->
+                    <div class="col-12 col-md-3">
+                        <label for="filterCategory" class="form-label" style="font-weight: 600;">Filter Nomor Perkara:</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-filter"></i></span>
+                            <select id="filterCategory" class="form-select">
+                                <option value="">Tampilkan Semua</option>
+                                <option value="Pid">Pidana</option>
+                                <option value="Pdt">Perdata</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Filter Agenda -->
+                    <div class="col-12 col-md-3">
+                        <label for="filterAgenda" class="form-label" style="font-weight: 600;">Filter Agenda:</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-filter"></i></span>
+                            <select id="filterAgenda" class="form-select">
+                                <option value="">Tampilkan Semua</option>
+                                <option value="SIDANG PERTAMA">SIDANG PERTAMA</option>
+                                <option value="Kehadiran para pihak">Kehadiran para pihak</option>
+                                <option value="PEMBUKTIAN">PEMBUKTIAN</option>
+                                <option value="PEMBUKTIAN AHLI">PEMBUKTIAN AHLI</option>
+                                <option value="PEMBACAAN DUPLIK">PEMBACAAN DUPLIK</option>
+                                <option value="PEMBACAAN TUNTUTAN">PEMBACAAN TUNTUTAN</option>
+                                <option value="PEMBACAAN KESIMPULAN">PEMBACAAN KESIMPULAN</option>
+                                <option value="PEMBACAAN PUTUSAN">PEMBACAAN PUTUSAN</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Filter Majelis Hakim -->
+                    <div class="col-12 col-md-3">
+                        <label for="filterMajelis" class="form-label" style="font-weight: 600;">Filter Majelis Hakim:</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-filter"></i></span>
+                            <select id="filterMajelis" class="form-select">
+                                <option value="">Tampilkan Semua</option>
+                                <option value="Restu Ikhlas">Restu Ikhlas</option>
+                                <option value="Tri Winzas Satria Halim">Tri Winzas Satria Halim</option>
+                                <option value="Anggoro Wicaksono">Anggoro Wicaksono</option>
+                                <option value="Aristian Akbar">Aristian Akbar</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Filter Panitera Pengganti -->
+                    <div class="col-12 col-md-3">
+                        <label for="filterPanitera" class="form-label" style="font-weight: 600;">Filter Panitera Pengganti:</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-filter"></i></span>
+                            <select id="filterPanitera" class="form-select">
+                                <option value="">Tampilkan Semua</option>
+                                <option value="Agus Rohman">Agus Rohman</option>
+                                <option value="Lado Firmansyah">Lado Firmansyah</option>
+                                <option value="Zulkifli Akbar">Zulkifli Akbar</option>
+                                <option value="Jimi Henderiyanto">Jimi Henderiyanto</option>
+                                <option value="Dewi Desyani">Dewi Desyani</option>
+                            </select>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
 
-
         <!-- Tabel Data -->
-        <div class="table-responsive bg-white shadow-sm rounded mt-4">
-            <table class="table table-bordered text-center ">
-                <thead class="bg-primary text-white">
+        <div class="table-wrapper rounded-lg mt-4">
+            <table class="table table-bordered table-hover">
+                <thead class="table-primary text-center">
                     <tr>
                         <th>No</th>
                         <th>Tanggal</th>
@@ -63,19 +163,43 @@
                         <th>Agenda</th>
                         <th>Majelis Hakim</th>
                         <th>Panitera Pengganti</th>
-                        <th class="tergugat-cell">Tergugat</th>
-                        <th>Penggugat (Jaksa)</th>
-                        <th>Kirim</th>
+                        <th>Tergugat</th>
+                        <th>Penggugat</th>
+                        <th>Kirim Notifikasi WhatApp</th>
+                        <th>Kirim Notifikasi Email</th>
                     </tr>
                 </thead>
                 <tbody id="caseTable">
-                    <!-- Contoh data -->
+                    <!-- Jika tidak ada data -->
+                    <tr id="noDataMessage">
+                        <td colspan="10" class="text-center text-muted">Tidak ada data</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
+
+        </script>
     </div>
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.14/jspdf.plugin.autotable.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <!-- XLSX.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.2/xlsx.full.min.js"></script>
+
+<!-- jsPDF & autoTable -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+
+
 </body>
+
 </html>
