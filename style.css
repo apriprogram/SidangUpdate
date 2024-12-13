@@ -1,49 +1,152 @@
-.table-responsive {
-  overflow-x: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* Wrapper tabel responsif */
+.table-wrapper {
+  overflow-x: auto; /* Memungkinkan scroll horizontal */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling pada perangkat iOS */
+  border-radius: 0.5rem;
+  background-color: #ffffff;
 }
 
+/* Tabel dasar */
 .table {
   width: 100%;
-  border-collapse: collapse;
+  margin: 0;
   font-size: 0.9rem;
-  border-radius: 8px;
-  overflow: hidden;
+  border-collapse: collapse;
 }
 
 .table th,
 .table td {
-  padding: 12px 15px;
-  border: 1px solid #ddd;
+  padding: 12px;
   text-align: center;
+  vertical-align: middle;
+  border: 1px solid #dee2e6;
 }
 
 .table th {
-  background-color: #111214;
-  color: #fff;
+  font-weight: bold;
+  background-color: #18171C;
+  color: white;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f8f9fa; /* Highlight baris saat di-hover */
+}
+
+/* Pesan "Tidak Ada Data" */
+#noDataMessage {
+  font-style: italic;
+  color: #6c757d;
+}
+
+/* Responsivitas */
+@media (max-width: 992px) { /* Tablet */
+  .table {
+      font-size: 0.85rem; /* Ukuran font lebih kecil */
+  }
+}
+
+@media (max-width: 768px) { /* Mobile */
+  .table {
+      font-size: 0.8rem; /* Ukuran font lebih kecil */
+  }
+
+  .table th,
+  .table td {
+      white-space: nowrap; /* Hindari wrap teks */
+  }
+}
+
+/* Custom scrollbar */
+.table-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background-color: #ced4da;
+  border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background-color: #f8f9fa;
+}
+
+
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.header img.logo {
+  max-width: 80px; /* Mengatur ukuran logo agar tidak terlalu besar */
+  height: auto;
+  margin: 5px;
+}
+
+.header-text h2 {
+  margin: 0;
   font-weight: bold;
 }
 
-.table td {
-  background-color: #ffffff;
+@media (max-width: 768px) {
+  .header {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .header-text h2 {
+      font-size: 1.2em; /* Mengatur ulang ukuran font pada layar kecil */
+  }
+
+  .header img.logo {
+      max-width: 60px; /* Menyusutkan logo pada layar kecil */
+  }
 }
 
-.table th:first-child,
-.table td:first-child {
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
+@media (max-width: 768px) {
+  /* Untuk mobile, memberikan jarak antara tombol */
+  .col-md-5 .btn {
+      width: 100%; /* Membuat tombol download mengisi lebar penuh */
+  }
+  
 }
 
-.table th:last-child,
-.table td:last-child {
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+/* Menyesuaikan ukuran logo */
+.logo {
+  max-width: 120px;  /* Menyesuaikan ukuran logo, bisa disesuaikan lebih kecil atau lebih besar */
+  height: auto;
 }
 
-.table .highlight {
-  font-weight: bold;
+/* Untuk header text pada perangkat mobile */
+.header-text {
+  text-align: left;  /* Judul tetap berada di tengah pada perangkat mobile */
 }
+
+@media (max-width: 768px) {
+  /* Pada mobile, logo dan teks lebih rapat */
+  .header {
+    align-items: center; /* Semua elemen berada di tengah */
+  }
+
+  .header-logos {
+    flex-direction: row; /* Kedua logo sejajar secara horizontal */
+    justify-content: space-between; /* Memberi ruang di antara logo */
+    width: 100%; /* Lebar penuh untuk tata letak */
+    padding: 0 10px; /* Sedikit padding untuk jarak */
+  }
+
+  .header img.logo {
+    max-width: 60px; /* Ukuran lebih kecil untuk logo */
+  }
+
+  .header-text h2 {
+    font-size: 1.2em; /* Teks lebih kecil pada perangkat mobile */
+  }
+}
+
 
 .btn {
   background-color: #305cf1;
@@ -113,3 +216,24 @@ html {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* Gaya untuk select input */
+.select-email {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* Gaya untuk tombol kirim */
+.btn-notification {
+  width: 100%;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.btn-notification:hover {
+  background-color: #218838;
+}
+
